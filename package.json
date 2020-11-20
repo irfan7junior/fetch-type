@@ -1,6 +1,6 @@
 {
   "name": "@irfan7junior/fetch-type",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Fetching the type file for an async request",
   "bin": "dist/index.js",
   "main": "dist/index.js",
@@ -29,6 +29,7 @@
   "homepage": "https://github.com:irfan7junior/fetch-type.git",
   "dependencies": {
     "axios": "^0.21.0",
+    "clipboardy": "^2.3.0",
     "commander": "^6.2.0",
     "quicktype-core": "^6.0.69"
   }

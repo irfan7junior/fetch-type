@@ -5,7 +5,7 @@
 ### Running fetch-type without the config file
 
 ```bash
-npx @irfan7junior/fetch-type -n filename.ts -f folderpath -u some_url
+npx @irfan7junior/fetch-type -n filename.ts -f folderpath -u some_url --clip
 ```
 
 ### Running fetch-type with config file
@@ -24,7 +24,8 @@ npx @irfan7junior/fetch-type -c config.json
     "amount": 15
   },
   "folder": "src/components/@interfaces",
-  "filename": "IInterface.ts"
+  "filename": "IInterface.ts",
+  "clip": true
 }
 ```
 
@@ -42,3 +43,4 @@ fetch-type with-the-flags
 - -n, --filename
 - -u, --url
 - -c, --config
+- -k, --clip

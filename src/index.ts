@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 
 import { createCommand } from 'commander'
+import clipboardy from 'clipboardy'
 
 import ConsoleReaderWriter from './ConsoleReaderWriter'
 import DataFetcher from './DataFetcher'
@@ -18,6 +19,7 @@ program.option('-f, --folder <location>', 'specify folder name', '@interfaces')
 program.option('-n, --filename <name>', 'specify file name', 'IResult.ts')
 program.option('-u, --url <url>', 'specify the url', undefined)
 program.option('-c, --config <path>', 'specify json location', undefined)
+program.option('-k --clip', 'copy to clipboard', false)
 
 program.parse(process.argv)
 
@@ -50,7 +52,8 @@ if (program.config) {
   url = data.url as string
   params = data.params as Object
   if (data.filename) filename = data.filename as string
-  if (data.folder) folder = data.folder as string
+  if (data.folder) folder = path.resolve(process.cwd(), data.folder as string)
+  if (data.clip) program.clip = true
 }
 
 if (program.url) {
@@ -65,6 +68,15 @@ const run = async () => {
   const crw = new ConsoleReaderWriter(filePath)
   const answer = await main(filename, df.getJSON())
   crw.writeData(answer)
+
+  // copy to clipboard or write a file
+  if (program.clip) {
+    clipboardy.writeSync(df.getJSON())
+  } else {
+    const dataFileName = filename.split('.')[0] + '.json'
+    const dataFilePath = path.resolve(folder, dataFileName)
+    fs.writeFileSync(dataFilePath, df.getJSON(), { encoding: 'utf8' })
+  }
 }
 
 run()
