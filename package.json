@@ -1,6 +1,6 @@
 {
   "name": "@irfan7junior/fetch-type",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Fetching the type file for an async request",
   "bin": "dist/index.js",
   "main": "dist/index.js",
