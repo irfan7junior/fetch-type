@@ -21,9 +21,8 @@ program.option('-c, --config <path>', 'specify json location', undefined)
 
 program.parse(process.argv)
 
-const filename: string = program.filename
-const folderPath: string = path.resolve(process.cwd(), program.folder)
-const filePath: string = path.resolve(folderPath, filename)
+let filename: string = program.filename
+let folder: string = path.resolve(process.cwd(), program.folder)
 
 let params: Object = {}
 let url: string = ''
@@ -50,11 +49,15 @@ if (program.config) {
   }
   url = data.url as string
   params = data.params as Object
+  if (data.filename) filename = data.filename as string
+  if (data.folder) folder = data.folder as string
 }
 
 if (program.url) {
   url = program.url
 }
+
+const filePath: string = path.resolve(folder, filename)
 
 const run = async () => {
   const df = new DataFetcher(url, params)

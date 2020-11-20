@@ -19,7 +19,9 @@ class DataFetcher implements IDataFetcher {
 
   fetchData = async () => {
     try {
-      const response = await Axios.get(this.url, this.params)
+      const response = await Axios.get(this.url, {
+        params: this.params,
+      })
       this.data = response.data
     } catch (error) {
       throw new Error('Unable to fetch data')
